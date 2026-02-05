@@ -1,0 +1,1193 @@
+ <!-- Save this as: main.html (and drop into your GitHub repo) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine’s Day Sports Proposal Competition</title>
+</head>
+<body>
+
+<section id="an-proposal-comp">
+  <style>
+    /* ===== Global scrollbar – Action branded ===== */
+    html, body {
+      scrollbar-width: thin;
+      scrollbar-color: #009B5E #e7fff1;
+      margin: 0; padding: 0;
+    }
+    html::-webkit-scrollbar { width: 8px; }
+    html::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00c46a, #009B5E);
+      border-radius: 10px;
+    }
+    html::-webkit-scrollbar-track { background: #e7fff1; }
+
+    /* ===== Proposal Competition Section ===== */
+    #an-proposal-comp{
+      --an-green:#009B5E;
+      --an-bg-dark:#020617;
+      --an-card-bg:#ffffff;
+      --an-card-border:#e5e7eb;
+      --an-text-main:#111827;
+      --an-text-muted:#4b5563;
+      --an-accent:#2563eb;
+      --an-max-width:1240px;
+      --an-main-width:1040px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      margin:0; padding:0;
+      background:#ffffff;
+      color:#f9fafb;
+    }
+    #an-proposal-comp *{ box-sizing:border-box; }
+
+    /* ===== HERO ===== */
+    #an-proposal-comp .an-hero{
+      background:
+        radial-gradient(circle at 0% 0%, rgba(0,155,94,.22) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(56,189,248,.22) 0, transparent 60%),
+        linear-gradient(135deg, #020617 0%, #020617 50%, #020617 100%);
+      padding:3.75rem 1.5rem 4.25rem;
+      color:#f9fafb;
+      text-align:center;
+    }
+    #an-proposal-comp .an-hero-inner{
+      max-width:var(--an-max-width);
+      margin:0 auto;
+      text-align:center;
+    }
+    .an-hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      background:rgba(15,23,42,.95);
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.7);
+      padding:.25rem .8rem;
+      margin-bottom:.75rem;
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#e5e7eb;
+    }
+    .an-hero-badge-dot{
+      width:7px; height:7px;
+      border-radius:999px;
+      background:var(--an-green);
+      box-shadow:0 0 10px rgba(0,155,94,.9);
+    }
+
+    .an-hero-kicker{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      color:#e5e7eb;
+      margin-bottom:.6rem;
+    }
+    .an-hero-title{
+      font-size:2.6rem;
+      line-height:1.15;
+      margin:0 0 .4rem;
+      color:#ffffff;
+    }
+    .an-hero-subtitle{
+      font-size:.98rem;
+      color:#ffffff;
+      margin-bottom:.9rem;
+      font-weight:500;
+    }
+    .an-hero-lede{
+      font-size:1.08rem;
+      max-width:100%;
+      margin:.75rem auto 1.6rem;
+      color:#ffffff;
+      line-height:1.6;
+      text-align:center !important;
+      display:block;
+    }
+    .an-hero-meta{
+      font-size:.9rem;
+      color:#ffffff;
+      margin-bottom:1.7rem;
+    }
+    .an-hero-meta span{
+      display:inline-block;
+      margin:0 .6rem;
+      white-space:nowrap;
+      color:inherit;
+    }
+    #an-proposal-comp .an-hero-lede strong,
+    #an-proposal-comp .an-hero-meta strong{
+      color:#00c46a !important;
+    }
+
+    /* ===== HERO IMAGE CAROUSEL (16:9) ===== */
+    .an-hero-img-wrap{ max-width:760px; margin:0 auto 1.2rem; }
+    .an-hero-img-frame{
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      background:#020617;
+      box-shadow:0 12px 32px rgba(0,0,0,.65), 0 0 0 1px rgba(15,23,42,.9);
+    }
+    .an-hero-img-frame::before{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.7);
+      pointer-events:none;
+      z-index:2;
+    }
+    .an-hero-slider{
+      position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      overflow:hidden;
+    }
+    .an-hero-slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transform:scale(1.01);
+      transition:opacity .6s ease, transform .9s ease;
+    }
+    .an-hero-slide.is-active{ opacity:1; transform:scale(1); }
+    .an-hero-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .an-hero-dots{
+      display:flex;
+      justify-content:center;
+      gap:7px;
+      margin-top:.7rem;
+    }
+    .an-hero-dot{
+      width:9px; height:9px;
+      border-radius:999px;
+      border:none;
+      padding:0;
+      background:rgba(229,231,235,.55);
+      cursor:pointer;
+      transition:transform .15s ease, background-color .15s ease;
+    }
+    .an-hero-dot.is-active{ background:#00c46a; transform:scale(1.3); }
+
+    /* ===== BUTTONS ===== */
+    .an-hero-actions{
+      display:flex;
+      justify-content:center;
+      gap:.85rem;
+      flex-wrap:wrap;
+    }
+    .an-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:.9rem 2.1rem;
+      border-radius:999px;
+      font-weight:600;
+      font-size:.98rem;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+      transition:.18s ease;
+      white-space:nowrap;
+      gap:.4rem;
+    }
+    .an-btn-primary{
+      background:linear-gradient(135deg, #38f28f 0%, #009B5E 50%, #007548 100%);
+      color:#ffffff;
+      box-shadow:0 10px 24px rgba(0,0,0,.6);
+    }
+    .an-btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(0,0,0,.8);
+    }
+    .an-btn-ghost{
+      background:#ffffff;
+      color:#009B5E;
+      border:none;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+    .an-btn-ghost:hover{ background:#e7fff1; color:#007548; }
+    .an-btn-icon{ font-size:1.1rem; line-height:1; }
+
+    #an-proposal-comp .an-btn-primary,
+    #an-proposal-comp .an-btn-primary:link,
+    #an-proposal-comp .an-btn-primary:visited{ color:#ffffff !important; }
+    #an-proposal-comp .an-btn span{ color:inherit !important; }
+
+    .an-hero-footnote{
+      margin-top:1rem;
+      font-size:.8rem;
+      color:#e5e7eb;
+    }
+
+    /* ===== MAIN WRAP ===== */
+    #an-proposal-comp .an-main-wrap{ background:#f3f4f6; padding:0; }
+
+    /* ===== TABS ===== */
+    .an-tabs-wrap{
+      max-width:none;
+      margin:-28px auto 0;
+      padding:0;
+      position:relative;
+      z-index:5;
+    }
+    .an-tabs{
+      width:100%;
+      background:#ffffff;
+      border:1px solid var(--an-card-border);
+      border-radius:0;
+      box-shadow:0 10px 26px rgba(15,23,42,.10);
+      overflow:hidden;
+    }
+    .an-tabs-bar{
+      display:flex;
+      background:#ffffff;
+      border-bottom:1px solid var(--an-card-border);
+    }
+    .an-tab-btn{
+      flex:1 1 0;
+      appearance:none;
+      background:transparent;
+      border:none;
+      padding:.95rem 1rem;
+      font-weight:700;
+      font-size:.95rem;
+      cursor:pointer;
+      color:#111827;
+      transition:background-color .15s ease, color .15s ease;
+    }
+    .an-tab-btn:hover{ background:#f3f4f6; }
+    .an-tab-btn[aria-selected="true"]{
+      background:#e7fff1;
+      color:#007548;
+      box-shadow:inset 0 -3px 0 #009B5E;
+    }
+    .an-tab-panel{ display:none; padding:0; }
+    .an-tab-panel.is-active{ display:block; }
+
+    /* ===== MAIN CARD ===== */
+    #an-proposal-comp .an-main{
+      width:100%;
+      max-width:var(--an-max-width);
+      margin:16px auto 0;
+      padding:2.5rem 0 3.1rem;
+      background:var(--an-card-bg);
+      border-radius:0;
+      box-shadow:0 -4px 18px rgba(0,0,0,.12);
+      border:1px solid var(--an-card-border);
+      position:relative;
+      color:var(--an-text-main);
+    }
+    .an-main-inner{
+      max-width:var(--an-main-width);
+      margin:0 auto;
+      padding:0 2.1rem 0;
+    }
+    #an-proposal-comp .an-main h2,
+    #an-proposal-comp .an-main h3{ text-align:left !important; }
+    #an-proposal-comp .an-main p,
+    #an-proposal-comp .an-main li{ text-align:left; }
+
+    #an-proposal-comp h2{
+      color:#111827;
+      margin:2rem 0 .9rem;
+      font-size:1.5rem;
+      line-height:1.3;
+    }
+    #an-proposal-comp h3{
+      color:#111827;
+      margin:0 0 .4rem;
+      font-size:1.1rem;
+      line-height:1.3;
+    }
+    #an-proposal-comp .an-main p{
+      margin:0 0 1rem;
+      font-size:1.04rem;
+      line-height:1.7;
+      color:var(--an-text-muted);
+    }
+    #an-proposal-comp .an-main ul{
+      padding-left:1.1rem;
+      margin:0 0 1.2rem;
+      list-style-position:outside;
+    }
+    #an-proposal-comp .an-main li{
+      margin:0 0 .55rem;
+      font-size:1.04rem;
+      line-height:1.7;
+      color:var(--an-text-muted);
+    }
+    #an-proposal-comp a{
+      color:var(--an-accent);
+      text-decoration:none;
+      border-bottom:1px dotted rgba(37,99,235,.5);
+    }
+    #an-proposal-comp a:hover{
+      color:#1d4ed8;
+      border-bottom-color:rgba(37,99,235,.9);
+    }
+    .an-cta-row{
+      display:flex;
+      justify-content:flex-start;
+      gap:.85rem;
+      flex-wrap:wrap;
+      margin:1.7rem 0 2.1rem;
+      text-align:center;
+    }
+    .an-note{ font-size:.9rem; color:#6b7280; }
+    .an-smallprint{
+      text-align:center;
+      font-size:.8rem;
+      color:#6b7280;
+      margin-top:1.5rem;
+    }
+
+    /* ===== Submitted Proposals Carousel ===== */
+    .an-gallery-intro{ margin-top:.5rem; margin-bottom:.6rem; }
+    .an-carousel{ margin-top:1.25rem; }
+
+    .an-carousel-stage{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b1220;
+      border:1px solid #e5e7eb;
+      box-shadow:0 12px 30px rgba(15,23,42,.10);
+    }
+    .an-carousel-stage::before{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      pointer-events:none;
+      z-index:2;
+    }
+    .an-carousel-main{
+      width:100%;
+      aspect-ratio:16/9;
+      object-fit:contain;
+      display:block;
+      background:#0b1220;
+    }
+    .an-carousel-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(2,6,23,.55);
+      color:#ffffff;
+      cursor:pointer;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.35rem;
+      transition:transform .15s ease, background-color .15s ease;
+    }
+    .an-carousel-arrow:hover{
+      transform:translateY(-50%) scale(1.04);
+      background:rgba(2,6,23,.75);
+    }
+    .an-carousel-arrow:disabled{ opacity:.35; cursor:not-allowed; }
+    .an-carousel-arrow.prev{ left:14px; }
+    .an-carousel-arrow.next{ right:14px; }
+
+    .an-carousel-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:baseline;
+      margin-top:.9rem;
+    }
+    .an-carousel-caption{
+      margin:0;
+      font-weight:600;
+      color:#111827;
+      font-size:1rem;
+      line-height:1.35;
+    }
+    .an-carousel-count{
+      margin:0;
+      color:#6b7280;
+      font-size:.9rem;
+    }
+
+    /* Thumbnail pager */
+    .an-thumb-row{
+      margin-top:.85rem;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+    .an-thumb-pager{
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      border:1px solid rgba(17,24,39,.12);
+      background:#ffffff;
+      color:#111827;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.25rem;
+      box-shadow:0 8px 18px rgba(15,23,42,.08);
+      transition:transform .12s ease, background-color .12s ease;
+      flex:0 0 auto;
+    }
+    .an-thumb-pager:hover{ transform:translateY(-1px); background:#f9fafb; }
+    .an-thumb-pager:disabled{ opacity:.35; cursor:not-allowed; transform:none; }
+
+    .an-thumb-window{ overflow:hidden; flex:1 1 auto; }
+    .an-thumb-strip{
+      display:grid;
+      grid-template-columns:repeat(8, minmax(0, 1fr));
+      gap:.6rem;
+      align-items:center;
+    }
+    .an-thumb{
+      width:100%;
+      aspect-ratio:3/2;
+      border-radius:10px;
+      overflow:hidden;
+      border:2px solid transparent;
+      cursor:pointer;
+      background:#111827;
+      box-shadow:0 6px 16px rgba(15,23,42,.08);
+      transition:transform .12s ease, border-color .12s ease;
+    }
+    .an-thumb:hover{ transform:translateY(-1px); }
+    .an-thumb.is-active{ border-color:#009B5E; }
+    .an-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Friendly empty-state card */
+    #an-proposal-comp .an-empty-state{
+      margin-top:1.25rem;
+      padding:18px 16px;
+      border-radius:16px;
+      background:#eef3ff;
+      border:1px dashed rgba(0,155,94,.35);
+      text-align:center;
+      color:#111827;
+      box-shadow:0 10px 26px rgba(15,23,42,.08);
+    }
+    #an-proposal-comp .an-empty-emoji{
+      font-size:28px;
+      line-height:1;
+      margin-bottom:10px;
+    }
+    #an-proposal-comp .an-empty-state h3{
+      margin:0 0 6px;
+      text-align:center !important;
+    }
+    #an-proposal-comp .an-empty-state p{
+      margin:6px 0;
+      color:#111827;
+      font-weight:600;
+      text-align:center !important;
+    }
+
+    @media (max-width:900px){
+      .an-thumb-strip{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+    }
+    @media (max-width:700px){
+      #an-proposal-comp .an-hero{ padding:3rem 1.2rem 3.3rem; }
+      #an-proposal-comp .an-hero-title{ font-size:2.1rem; }
+      #an-proposal-comp .an-main{ padding:2.1rem 0 2.8rem; }
+      #an-proposal-comp .an-main-inner{ padding-left:1.4rem; padding-right:1.4rem; }
+      .an-carousel-arrow{ width:40px; height:40px; }
+      .an-thumb-pager{ width:36px; height:36px; }
+      .an-thumb-strip{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    }
+
+    /* Footer */
+    #an-proposal-comp .an-footer{
+      background:#f3f4f6;
+      border-top:1px solid rgba(229,231,235,.9);
+      padding:16px 0 18px;
+      color:#6b7280;
+    }
+    #an-proposal-comp .an-footer-inner{
+      max-width:var(--an-max-width);
+      margin:0 auto;
+      padding:0 1.5rem;
+      font-size:.85rem;
+      line-height:1.5;
+      text-align:center;
+    }
+  </style>
+
+  <!-- ===== HERO ===== -->
+  <div class="an-hero">
+    <div class="an-hero-inner">
+      <div class="an-hero-badge">
+        <span class="an-hero-badge-dot"></span>
+        Valentine’s 2026 • U.S. Only
+      </div>
+
+      <div class="an-hero-img-wrap">
+        <div class="an-hero-img-frame">
+          <div class="an-hero-slider" data-an-slider="hero" data-autoplay="true">
+            <!-- Replace these hero images with your own URLs -->
+            <div class="an-hero-slide is-active">
+              <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1800&q=70"
+                   alt="Stadium crowd under lights" loading="eager">
+            </div>
+            <div class="an-hero-slide">
+              <img src="https://images.unsplash.com/photo-1520975958225-76c24193f26f?auto=format&fit=crop&w=1800&q=70"
+                   alt="Couple celebrating at a game" loading="lazy">
+            </div>
+            <div class="an-hero-slide">
+              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1800&q=70"
+                   alt="Ring in hand" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="an-hero-dots" aria-label="Header image selector"></div>
+      </div>
+
+      <div class="an-hero-kicker">THE ACTION NETWORK / BETTER COLLECTIVE USA</div>
+      <h1 class="an-hero-title">Valentine’s Day Sports Proposal Competition</h1>
+      <p class="an-hero-subtitle">One big moment. One sports crowd. One $4,000 wedding boost.</p>
+
+      <p class="an-hero-lede">
+        Planning a proposal at a live sports game in February? Capture the moment and send us the clip.
+        The best in-game proposal wins <strong>$4,000</strong> toward the wedding.
+      </p>
+
+      <div class="an-hero-meta">
+        <span><strong>Contest closes:</strong> Feb 28, 2026 (11:59 PM ET)</span>
+        <span><strong>Grand Prize:</strong> $4,000 USD</span>
+      </div>
+
+      <div class="an-hero-actions">
+        <!-- TODO: replace with your real entry form URL -->
+        <a href="https://forms.gle/REPLACE_ME" class="an-btn an-btn-primary" target="_blank" rel="noopener noreferrer">
+          <span class="an-btn-icon">💍</span><span>Enter the Contest</span>
+        </a>
+
+        <!-- TODO: create toc.html and link it here -->
+        <a href="./toc.html" class="an-btn an-btn-ghost" target="_blank" rel="noopener noreferrer">
+          Terms &amp; Conditions
+        </a>
+      </div>
+
+      <div class="an-hero-footnote">
+        No Purchase Necessary • U.S. Residents • 21+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN + TABS ===== -->
+  <div class="an-main-wrap">
+    <div class="an-tabs-wrap">
+      <div class="an-tabs" role="tablist" aria-label="Proposal contest tabs">
+
+        <div class="an-tabs-bar">
+          <button class="an-tab-btn" type="button" role="tab"
+                  id="an-tab-guidelines" aria-selected="true"
+                  aria-controls="an-panel-guidelines">
+            Contest Guidelines
+          </button>
+          <button class="an-tab-btn" type="button" role="tab"
+                  id="an-tab-submitted" aria-selected="false"
+                  aria-controls="an-panel-submitted">
+            Submitted Proposals
+          </button>
+        </div>
+
+        <!-- Panel: Guidelines -->
+        <div class="an-tab-panel is-active" role="tabpanel"
+             id="an-panel-guidelines" aria-labelledby="an-tab-guidelines">
+          <div class="an-main" id="an-proposal-details">
+            <div class="an-main-inner">
+
+              <h2>Overview</h2>
+              <p>
+                The <strong>Valentine’s Day Sports Proposal Competition</strong> is a free, fan-focused promotional contest
+                celebrating unique marriage proposals that take place at live sporting events.
+              </p>
+              <p>
+                Participants who plan (or have recently completed) a marriage proposal at a sports game in February submit a video
+                clip of the proposal for consideration. One winning submission will be selected based on creativity, originality,
+                and emotional impact.
+              </p>
+              <p>
+                The selected winner will receive <strong>$4,000 USD</strong> toward wedding-related expenses. This is a promotional
+                contest designed to drive seasonal Valentine’s Day engagement. It does not involve wagering, betting, or entry fees
+                and is not an offer of employment.
+              </p>
+
+              <h2>Contest Period</h2>
+              <ul>
+                <li><strong>Contest Period:</strong> February 14, 2026 – February 28, 2026</li>
+              </ul>
+
+              <h2>Key Dates (2026)</h2>
+              <ul>
+                <li><strong>Proposal submission window opens:</strong> Sunday, February 14, 2026</li>
+                <li><strong>Proposal submission window closes:</strong> Saturday, February 28, 2026 at 11:59 PM ET</li>
+                <li><strong>Judging period:</strong> March 1 – March 7, 2026</li>
+                <li><strong>Winner notification:</strong> No later than March 14, 2026</li>
+              </ul>
+
+              <h2>How to Enter</h2>
+              <p>
+                To enter, complete the official entry form:
+                <a href="https://forms.gle/REPLACE_ME" target="_blank" rel="noopener noreferrer">Valentine’s Day Sports Proposal Competition Entry Form</a>.
+              </p>
+              <ul>
+                <li>Provide your full name and email address.</li>
+                <li>Confirm U.S. residency and age eligibility.</li>
+                <li>Submit a <strong>direct link</strong> or <strong>uploaded file</strong> containing a video clip of a marriage proposal at a live sporting event.</li>
+                <li>Confirm all individuals appearing in the video have consented to submission and potential promotional use.</li>
+                <li>Add a short written description for context (optional but encouraged).</li>
+              </ul>
+
+              <h2>Eligibility</h2>
+              <ul>
+                <li>Open to <strong>legal U.S. residents only</strong>.</li>
+                <li>Must be <strong>21 years of age or older</strong>.</li>
+                <li>Must be one of the individuals involved in the proposal, or have explicit permission from both parties featured in the video.</li>
+                <li>No purchase necessary. <strong>One (1) submission per person</strong>.</li>
+                <li>Employees of Action Network, Better Collective, and their affiliated companies are not eligible to enter.</li>
+              </ul>
+
+              <h2>Submission Requirements</h2>
+              <ul>
+                <li>Proposals must take place at a <strong>live sporting event</strong> (professional, collegiate, or major sporting venue).</li>
+                <li>Proposal must occur during <strong>February 2026</strong>.</li>
+                <li>Video must be appropriate for general audiences and free of offensive or unsafe content.</li>
+              </ul>
+
+              <h2>Judging &amp; Winner Selection</h2>
+              <p>Submissions will be judged by Action Network staff based on:</p>
+              <ul>
+                <li><strong>Creativity and originality</strong> (40%)</li>
+                <li><strong>Emotional impact / storytelling</strong> (40%)</li>
+                <li><strong>Relevance to sports and live game atmosphere</strong> (20%)</li>
+              </ul>
+              <p class="an-note">
+                No public voting will be used. Judging is subjective. Action Network’s decisions are final and binding.
+                If no submission meets minimum quality or eligibility standards, Action Network reserves the right to withhold awarding the prize.
+              </p>
+
+              <h2>Prize</h2>
+              <ul>
+                <li><strong>One (1) winner</strong> will be awarded <strong>$4,000 USD</strong> to be used toward wedding-related expenses.</li>
+                <li><strong>Prize payment:</strong> PayPal, check, or another mutually agreed-upon payment method.</li>
+                <li>Prize is a cash award, not a reimbursement and not contingent on proof of wedding spend.</li>
+                <li>Prize is non-transferable.</li>
+                <li>This is a promotional prize, not compensation for services rendered.</li>
+              </ul>
+
+              <h2>Winner Notification</h2>
+              <ul>
+                <li>Winner will be notified via the email address provided.</li>
+                <li>Winner must respond within the timeframe specified in the notification email (typically 5–7 days).</li>
+                <li>Failure to respond may result in disqualification and selection of an alternate winner.</li>
+              </ul>
+
+              <h2>Winner Publicity &amp; Rights</h2>
+              <p>
+                Winners may be invited (but are not required) to participate in reasonable promotional activity, including:
+              </p>
+              <ul>
+                <li>Allowing Action Network to reference their first name, state, and proposal story.</li>
+                <li>Featuring submitted video clips or stills on Action Network-owned websites and social media channels.</li>
+              </ul>
+              <p class="an-note">
+                Participation is optional and not a condition of receiving the prize.
+              </p>
+
+              <div class="an-cta-row">
+                <a href="https://forms.gle/REPLACE_ME" class="an-btn an-btn-primary" target="_blank" rel="noopener noreferrer">
+                  Enter the Contest
+                </a>
+                <a href="./toc.html" class="an-btn an-btn-ghost" target="_blank" rel="noopener noreferrer">
+                  View Full Terms &amp; Conditions
+                </a>
+              </div>
+
+              <p class="an-smallprint">
+                This contest is not sponsored, endorsed, or administered by any sports league, team, venue, or third-party brand.
+                Any third-party trademarks that appear incidentally in user-submitted content belong to their respective owners and do not imply affiliation.
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Submitted Proposals -->
+        <div class="an-tab-panel" role="tabpanel"
+             id="an-panel-submitted" aria-labelledby="an-tab-submitted">
+          <div class="an-main">
+            <div class="an-main-inner">
+
+              <p class="an-gallery-intro">
+                This gallery shows <strong>approved</strong> proposal clips. Check back as new submissions get reviewed!
+              </p>
+
+              <h2 id="an-submitted-heading">Loading approved entries…</h2>
+
+              <div id="an-empty-state" class="an-empty-state" hidden>
+                <div class="an-empty-emoji" aria-hidden="true">💍🏟️</div>
+                <h3>No proposals in the gallery yet!</h3>
+                <p>Looks like everyone is still warming up.</p>
+                <p><strong>Submit your proposal clip and be the first featured 💚</strong></p>
+              </div>
+
+              <div class="an-carousel" id="an-carousel" style="display:none;">
+                <div class="an-carousel-stage">
+                  <button class="an-carousel-arrow prev" type="button" aria-label="Previous entry">‹</button>
+                  <img class="an-carousel-main" id="an-carousel-main" src="" alt="Approved proposal entry thumbnail">
+                  <button class="an-carousel-arrow next" type="button" aria-label="Next entry">›</button>
+                </div>
+
+                <div class="an-carousel-meta">
+                  <p class="an-carousel-caption" id="an-carousel-caption"></p>
+                  <p class="an-carousel-count" id="an-carousel-count">1 / 1</p>
+                </div>
+
+                <div class="an-thumb-row" aria-label="Thumbnail navigation">
+                  <button class="an-thumb-pager" id="an-thumb-prev" type="button" aria-label="Previous thumbnails">‹</button>
+                  <div class="an-thumb-window">
+                    <div class="an-thumb-strip" id="an-thumb-strip"></div>
+                  </div>
+                  <button class="an-thumb-pager" id="an-thumb-next" type="button" aria-label="Next thumbnails">›</button>
+                </div>
+              </div>
+
+              <div class="an-cta-row" style="margin-top:1.6rem;">
+                <a href="https://forms.gle/REPLACE_ME" class="an-btn an-btn-primary" target="_blank" rel="noopener noreferrer">
+                  Enter the Contest
+                </a>
+                <button type="button" class="an-btn an-btn-ghost" data-switch-tab="guidelines">
+                  Read Guidelines
+                </button>
+              </div>
+
+              <p class="an-note">
+                Only approved entries appear here. If your clip isn’t visible yet, it may still be in review.
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="an-footer" role="contentinfo">
+      <div class="an-footer-inner">
+        Explore more from The Action Network:
+        <a href="https://www.actionnetwork.com/online-sports-betting/reviews/draftkings/" target="_blank" rel="noopener noreferrer">
+          DraftKings Promo Code
+        </a>
+        and
+        <a href="https://www.actionnetwork.com/online-sports-betting/reviews/fanduel" target="_blank" rel="noopener noreferrer">
+          FanDuel Promo Code
+        </a>.
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    /* ===== iframe auto-resize (child -> parent) ===== */
+    function reportHeight() {
+      try {
+        const doc = document.documentElement;
+        const body = document.body;
+        const h = Math.max(
+          body.scrollHeight, body.offsetHeight,
+          doc.clientHeight, doc.scrollHeight, doc.offsetHeight
+        );
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "proposalcomp:resize", height: h }, "*");
+        }
+      } catch (e) {}
+    }
+    let _t1=null,_t2=null;
+    function scheduleResize() {
+      reportHeight();
+      if (_t1) clearTimeout(_t1);
+      if (_t2) clearTimeout(_t2);
+      _t1=setTimeout(reportHeight,180);
+      _t2=setTimeout(reportHeight,650);
+    }
+    window.addEventListener("load", () => scheduleResize());
+    (function attachResizeObserver() {
+      const root = document.getElementById("an-proposal-comp") || document.body;
+      if (root && "ResizeObserver" in window) {
+        const ro = new ResizeObserver(() => scheduleResize());
+        ro.observe(root);
+      }
+    })();
+
+    /* ===== HERO SLIDER ===== */
+    const heroSlider = document.querySelector('#an-proposal-comp [data-an-slider="hero"]');
+    if (heroSlider) {
+      const slides = Array.from(heroSlider.querySelectorAll('.an-hero-slide'));
+      const dotsWrap = document.querySelector('#an-proposal-comp .an-hero-dots');
+      const AUTO_INTERVAL = 4500;
+      let index = 0;
+      let timer = null;
+
+      if (slides.length > 1 && dotsWrap) {
+        const dots = slides.map((_, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'an-hero-dot' + (i === 0 ? ' is-active' : '');
+          btn.setAttribute('aria-label', 'Show header image ' + (i + 1));
+          btn.addEventListener('click', () => {
+            goTo(i);
+            restart();
+            scheduleResize();
+          });
+          dotsWrap.appendChild(btn);
+          return btn;
+        });
+
+        function goTo(i) {
+          slides[index].classList.remove('is-active');
+          dots[index] && dots[index].classList.remove('is-active');
+          index = i;
+          slides[index].classList.add('is-active');
+          dots[index] && dots[index].classList.add('is-active');
+        }
+
+        function start() {
+          const autoplay = heroSlider.dataset.autoplay === 'true';
+          if (!autoplay) return null;
+          return setInterval(() => goTo((index + 1) % slides.length), AUTO_INTERVAL);
+        }
+        function restart() {
+          if (timer) clearInterval(timer);
+          timer = start();
+        }
+        timer = start();
+      }
+    }
+
+    /* ===== TABS ===== */
+    const tabGuidelines = document.getElementById('an-tab-guidelines');
+    const tabSubmitted  = document.getElementById('an-tab-submitted');
+    const panelGuidelines = document.getElementById('an-panel-guidelines');
+    const panelSubmitted  = document.getElementById('an-panel-submitted');
+
+    function setTab(which) {
+      const isGuidelines = which === 'guidelines';
+      tabGuidelines.setAttribute('aria-selected', isGuidelines ? 'true' : 'false');
+      tabSubmitted.setAttribute('aria-selected', isGuidelines ? 'false' : 'true');
+      panelGuidelines.classList.toggle('is-active', isGuidelines);
+      panelSubmitted.classList.toggle('is-active', !isGuidelines);
+      scheduleResize();
+    }
+
+    if (tabGuidelines && tabSubmitted && panelGuidelines && panelSubmitted) {
+      tabGuidelines.addEventListener('click', () => setTab('guidelines'));
+      tabSubmitted.addEventListener('click',  () => setTab('submitted'));
+
+      document.querySelectorAll('#an-proposal-comp [data-switch-tab]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-switch-tab');
+          setTab(target === 'guidelines' ? 'guidelines' : 'submitted');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          scheduleResize();
+        });
+      });
+    }
+
+    /* ===== Carousel wiring ===== */
+    const carouselWrap = document.getElementById('an-carousel');
+    const mainImg = document.getElementById('an-carousel-main');
+    const captionEl = document.getElementById('an-carousel-caption');
+    const countEl = document.getElementById('an-carousel-count');
+    const headingEl = document.getElementById('an-submitted-heading');
+    const emptyStateEl = document.getElementById('an-empty-state');
+
+    const prevMain = carouselWrap ? carouselWrap.querySelector('.an-carousel-arrow.prev') : null;
+    const nextMain = carouselWrap ? carouselWrap.querySelector('.an-carousel-arrow.next') : null;
+
+    const thumbStrip = document.getElementById('an-thumb-strip');
+    const thumbPrev = document.getElementById('an-thumb-prev');
+    const thumbNext = document.getElementById('an-thumb-next');
+
+    const THUMBS_PER_PAGE = 8;
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+
+    function showEmptyState() {
+      if (emptyStateEl) emptyStateEl.hidden = false;
+      if (carouselWrap) carouselWrap.style.display = "none";
+      scheduleResize();
+    }
+    function showCarousel() {
+      if (emptyStateEl) emptyStateEl.hidden = true;
+      if (carouselWrap) carouselWrap.style.display = "";
+      scheduleResize();
+    }
+
+    function openInNewTab(url) {
+      try {
+        const w = window.open(url, '_blank', 'noopener,noreferrer');
+        if (w) { try { w.opener = null; } catch (_) {} return true; }
+      } catch (_) {}
+      try {
+        const a = document.createElement('a');
+        a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        return true;
+      } catch (_) {}
+      return false;
+    }
+
+    function initCarousel(items) {
+      if (!items || !items.length) return;
+
+      let active = 0;
+      let page = 0;
+      const totalPages = Math.ceil(items.length / THUMBS_PER_PAGE);
+
+      function renderThumbPage() {
+        const start = page * THUMBS_PER_PAGE;
+        const end = Math.min(start + THUMBS_PER_PAGE, items.length);
+        if (!thumbStrip) return;
+        thumbStrip.innerHTML = "";
+
+        for (let i = start; i < end; i++) {
+          const btn = document.createElement('button');
+          btn.type = "button";
+          btn.className = "an-thumb" + (i === active ? " is-active" : "");
+          btn.setAttribute("aria-label", "View entry " + (i + 1));
+          btn.innerHTML = `<img src="${items[i].src}" alt="Thumbnail ${i + 1}" loading="lazy">`;
+          btn.addEventListener('click', () => { setActive(i); scheduleResize(); });
+          thumbStrip.appendChild(btn);
+        }
+
+        if (thumbPrev) thumbPrev.disabled = (page === 0);
+        if (thumbNext) thumbNext.disabled = (page >= totalPages - 1);
+        scheduleResize();
+      }
+
+      function syncActiveThumb() {
+        const desiredPage = Math.floor(active / THUMBS_PER_PAGE);
+        if (desiredPage !== page) {
+          page = desiredPage;
+          renderThumbPage();
+        } else if (thumbStrip) {
+          const pageStart = page * THUMBS_PER_PAGE;
+          Array.from(thumbStrip.children).forEach((el, idx) => {
+            el.classList.toggle('is-active', (pageStart + idx) === active);
+          });
+        }
+      }
+
+      function setActive(i) {
+        active = clamp(i, 0, items.length - 1);
+
+        const title = (items[active].title || ("Approved Proposal #" + (active + 1))).trim();
+        const caption = (items[active].caption || "").trim();
+
+        if (headingEl) headingEl.textContent = title;
+        if (captionEl) captionEl.textContent = caption || "Click the image to watch the clip →";
+
+        if (mainImg) {
+          mainImg.src = items[active].src;
+          mainImg.alt = caption ? ("Proposal entry: " + caption) : title;
+
+          // Click thumbnail to open clip link
+          const clip = items[active].clipUrl;
+          mainImg.style.cursor = clip ? "pointer" : "default";
+          mainImg.onclick = clip ? () => openInNewTab(clip) : null;
+        }
+
+        if (countEl) countEl.textContent = (active + 1) + " / " + items.length;
+        syncActiveThumb();
+
+        if (prevMain) prevMain.disabled = (items.length <= 1);
+        if (nextMain) nextMain.disabled = (items.length <= 1);
+
+        scheduleResize();
+      }
+
+      if (prevMain) prevMain.addEventListener('click', () => { setActive((active - 1 + items.length) % items.length); });
+      if (nextMain) nextMain.addEventListener('click', () => { setActive((active + 1) % items.length); });
+
+      if (thumbPrev) thumbPrev.addEventListener('click', () => {
+        page = clamp(page - 1, 0, totalPages - 1);
+        renderThumbPage();
+      });
+      if (thumbNext) thumbNext.addEventListener('click', () => {
+        page = clamp(page + 1, 0, totalPages - 1);
+        renderThumbPage();
+      });
+
+      renderThumbPage();
+      setActive(0);
+      scheduleResize();
+    }
+
+    /* ===== Approved Proposals: load from published Google Sheet CSV =====
+       Expected headers in your sheet (row 1):
+       - Title
+       - Caption
+       - Thumbnail URL
+       - Clip URL
+    */
+    const SHEET_CSV_URL =
+      "REPLACE_WITH_YOUR_PUBLISHED_SHEET_CSV_URL";
+
+    function parseCSV(text) {
+      const s = String(text || "").replace(/^\uFEFF/, "");
+      const rows = [];
+      let row = [];
+      let cur = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        const next = s[i + 1];
+
+        if (ch === '"') {
+          if (inQuotes && next === '"') { cur += '"'; i++; }
+          else { inQuotes = !inQuotes; }
+          continue;
+        }
+        if (!inQuotes && ch === ',') { row.push(cur); cur = ""; continue; }
+        if (!inQuotes && ch === '\n') { row.push(cur); rows.push(row); row = []; cur = ""; continue; }
+        if (!inQuotes && ch === '\r') { continue; }
+        cur += ch;
+      }
+      row.push(cur);
+      rows.push(row);
+      while (rows.length && rows[rows.length - 1].every(c => String(c || "").trim() === "")) rows.pop();
+      return rows.map(r => r.map(c => String(c || "").trim()));
+    }
+
+    function toDirectImageUrl(url) {
+      if (!url) return "";
+      const u = String(url).trim();
+      let m = u.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+      if (m && m[1]) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+      m = u.match(/[?&]id=([^&]+)/i);
+      if (m && m[1] && u.includes("drive.google.com")) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+      return u;
+    }
+
+    function findCol(headers, names) {
+      const lower = headers.map(h => String(h || "").trim().toLowerCase());
+      for (const n of names) {
+        const idx = lower.indexOf(String(n).toLowerCase());
+        if (idx !== -1) return idx;
+      }
+      return -1;
+    }
+
+    async function loadApprovedEntries() {
+      if (!SHEET_CSV_URL || SHEET_CSV_URL.startsWith("REPLACE_")) return [];
+      const res = await fetch(SHEET_CSV_URL + "&_=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("Failed to fetch Approved Entries CSV");
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+      if (!rows || rows.length < 2) return [];
+
+      const headers = rows[0];
+      const idxTitle   = findCol(headers, ["Title", "Approved Proposals", "Approved Proposal"]);
+      const idxCaption = findCol(headers, ["Caption"]);
+      const idxThumb   = findCol(headers, ["Thumbnail URL", "Thumbnail", "Thumb URL", "Image URL"]);
+      const idxClip    = findCol(headers, ["Clip URL", "Video URL", "Link", "Submission URL"]);
+
+      const items = rows.slice(1).map((r, i) => {
+        const row = r.slice();
+        while (row.length < headers.length) row.push("");
+
+        const title   = idxTitle >= 0 ? (row[idxTitle] || "").trim() : "";
+        const caption = idxCaption >= 0 ? (row[idxCaption] || "").trim() : "";
+        const rawThumb = idxThumb >= 0 ? (row[idxThumb] || "").trim() : "";
+        const clipUrl  = idxClip >= 0 ? (row[idxClip] || "").trim() : "";
+
+        const src = toDirectImageUrl(rawThumb);
+
+        return {
+          src,
+          clipUrl,
+          title: title || `Approved Proposal #${i + 1}`,
+          caption
+        };
+      }).filter(x =>
+        x.src && /^https?:\/\//i.test(x.src) &&
+        x.clipUrl && /^https?:\/\//i.test(x.clipUrl)
+      );
+
+      return items;
+    }
+
+    // Loading UI
+    showEmptyState();
+    if (headingEl) headingEl.textContent = "Loading approved entries…";
+
+    loadApprovedEntries()
+      .then(items => {
+        if (items && items.length) {
+          showCarousel();
+          initCarousel(items);
+        } else {
+          showEmptyState();
+        }
+        scheduleResize();
+      })
+      .catch(err => {
+        console.warn("Sheet load failed:", err);
+        showEmptyState();
+        scheduleResize();
+      });
+
+    /* ===== Force outbound links to open in a new tab (capture phase) ===== */
+    const root = document.getElementById('an-proposal-comp');
+    if (root) {
+      root.addEventListener('click', function (e) {
+        const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+
+        const href = a.getAttribute('href');
+        if (!href) return;
+
+        if (/^(mailto:|tel:)/i.test(href)) return;
+        if (href.startsWith('#')) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const ok = openInNewTab(href);
+        if (!ok) (window.top || window).location.href = href;
+      }, true);
+    }
+
+    scheduleResize();
+  })();
+  </script>
+</section>
+
+</body>
+</html>
